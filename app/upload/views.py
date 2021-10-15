@@ -9,7 +9,7 @@ def image_upload(request):
     if request.method == 'POST':
         image_file = request.FILES['image_file']
         if settings.USE_S3:
-            upload = Upload(file=image_file)
+            upload = UploadPrivate(file=image_file)
             upload.save()
             image_url = upload.file.url
         else:
