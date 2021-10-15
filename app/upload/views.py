@@ -2,14 +2,14 @@ from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
-from .models import Upload, UploadPrivate
+from .models import Upload
 
 
 def image_upload(request):
     if request.method == 'POST':
         image_file = request.FILES['image_file']
         if settings.USE_S3:
-            upload = UploadPrivate(file=image_file)
+            upload = Upload(file=image_file)
             upload.save()
             image_url = upload.file.url
         else:
